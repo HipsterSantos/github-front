@@ -1,6 +1,12 @@
 import './List.scss'
 import empy from '../pages/empty.svg'
+import { toList } from '../pages/Users';
+import {useContext,createContext} from 'react';
+
+
 export const Item = ()=>{
+    const GitHubOutcome = useContext(toList)
+    console.log('from list and put it ',GitHubOutcome)
     return( 
         <div className="list-main">
             <div className="divider"></div>

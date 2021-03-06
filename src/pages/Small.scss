@@ -4,6 +4,7 @@
         flex-direction: column;
         .menus{
             display: flex;
+            line-height: 3;
             border-bottom:3px solid #a8a8b6;
             
             .inside-menu{
@@ -27,38 +28,59 @@
             margin-top:.1em;
             padding-bottom: .3em;
             }
+
+            .github-u::after{
+                content: " ";
+                display: block;
+                width: 150px;
+               
+                background-color: #181830;
+                border-radius: 15px;
+                // margin:2em 1em;
+                border: none;
+                margin-top: -0.2em;
+                position: absolute;
+                padding-bottom: .3em;
+                left: 0;
+                right: 0;
+                
+            }
+            .github-c::after{
+                content: " ";
+                display: block;
+                width: inherit;
+               
+                background-color: #181830;
+                border-radius: 15px;
+                // margin:2em 1em;
+                border: none;
+                margin-top: -0.2em;
+                position: absolute;
+                padding-bottom: .3em;
+                left: 52vw;
+                right: 0;
+                
+            }
+            .github-users-left{
+                flex:2  !important;
+                margin-right: 6em;
+                .user-contributions{
+                    font-size: 10pt;
+                    display: flex;
+                    .user-left{
+                     margin-right:1em;
+                    }
+                    .companies-right{
+                        align-self: flex-end;
+                        margin-left: auto!important;
+                        color:#757575
+                    }
+                    
+                    }
+            }
         }
        
-        .github::after{
-            content: " ";
-            display: block;
-            width: inherit;
-            height: .011px;
-            background-color: #181830;
-            border-radius: 15px;
-            // margin:2em 1em;
-            border: none;
-            margin-top:.8em;
-            padding-bottom: .3em;
-            
-        }
-        .github-users-left{
-            flex:2  !important;
-            margin-right: 2em;
-            .user-contributions{
-                font-size: 10pt;
-                display: flex;
-                .user-left{
-                 margin-right:1em;
-                }
-                .companies-right{
-                    align-self: flex-end;
-                    margin-left: auto!important;
-                    color:#757575
-                }
-                
-                }
-        }
+   
         .github-companies-right{
             flex:2  !important;
         }
