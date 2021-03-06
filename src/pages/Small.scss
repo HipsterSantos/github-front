@@ -1,0 +1,82 @@
+.mobile-content{
+    .splitters-descriptors{
+        display: flex;
+        flex-direction: column;
+        .menus{
+            display: flex;
+            border-bottom:3px solid #a8a8b6;
+            
+            .inside-menu{
+                color: #181830;
+                text-decoration: none;
+            }
+            .menus::after{
+            content: " ";
+            display: block;
+            width: inherit;
+            height: .011px;
+            position: relative;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #181830;
+            border-radius: 15px;
+            // margin:2em 1em;
+            border: none;
+            margin-top:.1em;
+            padding-bottom: .3em;
+            }
+        }
+       
+        .github::after{
+            content: " ";
+            display: block;
+            width: inherit;
+            height: .011px;
+            background-color: #181830;
+            border-radius: 15px;
+            // margin:2em 1em;
+            border: none;
+            margin-top:.8em;
+            padding-bottom: .3em;
+            
+        }
+        .github-users-left{
+            flex:2  !important;
+            margin-right: 2em;
+            .user-contributions{
+                font-size: 10pt;
+                display: flex;
+                .user-left{
+                 margin-right:1em;
+                }
+                .companies-right{
+                    align-self: flex-end;
+                    margin-left: auto!important;
+                    color:#757575
+                }
+                
+                }
+        }
+        .github-companies-right{
+            flex:2  !important;
+        }
+        .github-companies-right,.github-users-left{
+            .user-contributions{
+                font-size: 10pt;
+                display: flex;
+                .user-left{
+                 margin-right:1em;
+                }
+                .companies-right{
+                    align-self: flex-end;
+                    margin-left: auto!important;
+                    color:#757575
+                }
+                
+                }
+        }
+    }
+   
+}
