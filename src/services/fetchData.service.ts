@@ -2,7 +2,7 @@ import { ThreeSixty } from '@material-ui/icons';
 import { Users } from '../shared/users.model';
 import { Companies } from '../shared/companies.model';
 export class fetchData{
-    private token = 'c9df80f776a7e3e48ae3c9023764f6ac3941127f' || process.env.REACT_API_KEY;
+    private token = '44027e0bb7d0755a73f1a3721265208c4658cd35' || process.env.REACT_API_KEY;
     private users: Users[] = [];
     private companies: Companies[] = [];
     constructor(public query:string){

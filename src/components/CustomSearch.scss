@@ -1,0 +1,27 @@
+.custom-text-input{
+    display: flex;
+    border: none;
+    border: 1px solid rgb(177, 177, 177);
+    border-radius: .15em;
+    margin-bottom: 3em;
+    padding: .3em;
+    input{
+        width: inherit;
+        flex:5;
+        border:none;
+        padding-left: .5em;
+        font-size: 13pt;
+        outline: none;
+    }
+    span{
+        align-items: flex-end;
+        width: inherit;
+        height: inherit;
+        background-color: rgb(180, 59, 164);
+        padding: .2em .2em;
+        align-items: center;
+        justify-content: center;
+        border-radius: .2em;
+        margin:auto;
+    }
+}

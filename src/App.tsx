@@ -1,24 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-
+import { CustomSearch } from './components/CustomSearch';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+ <div className="holder-content">
+            <div className="description">
+                <h1>Search for GitHub Users</h1>
+            </div>
+            <div className="search" style={{width:'inherit'}}>
+                <div className="input-customized">
+                    <CustomSearch/>
+                </div>
+            </div>
+            <div className="holder-responsive">
+               here will come the next content
+            </div>
+    </div>
     </div>
   );
 }
