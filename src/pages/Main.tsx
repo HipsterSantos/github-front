@@ -1,14 +1,18 @@
-import {useState,useEffect}from 'react';
+import {useState,useEffect,useContext, createContext}from 'react';
 import { Larger } from './Large';
 import { Smaller } from './Small';
-
+import { gitHubuser } from '../App';
+export const fromMain:any|any[] = createContext(null);
 export function Main(){
- 
+  var value = useContext(gitHubuser)
       let small = useMedia("(max-width: 768px)")
       let large = useMedia("(min-width: 769px)")
+      
     return(
         <div>
+          <fromMain.Provider value={value}> 
             {small?<Smaller/>:<Larger/>}
+          </fromMain.Provider>
         </div>
     )
 }

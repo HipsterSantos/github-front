@@ -20,7 +20,7 @@ export class fetchData{
                            this.test.push(d);
                            
                        }
-                      console.log(d)
+                      console.log('coming from test fetcher')
                     })
                    
             })
@@ -39,7 +39,7 @@ export class fetchData{
                            this.users.push(each);
                           //    console.log(each) 
                        }
-                    //    console.log(this.users)
+                       console.log("coming from fetch user");
             })
         })
        
@@ -56,14 +56,14 @@ export class fetchData{
                            this.companies.push(d);
                        }
                     })
-                    // console.log(eachone)
+                    console.log("coming from fetch orgs")
             
         })
          return this.companies;
     }
 
     getContribution(users:Users[]){
-        let fake:Users[]=[];
+        
         const headers = {
             'Authorization': `bearer ${this.token}`,
         }
@@ -95,58 +95,17 @@ export class fetchData{
                   }`
             }
         }
-        fake = Array.from(users);
-        fake.forEach(d=>{
-            console.log(d)
-        })
         console.log('from get contribuitions',users)
          
 
         // return this.users;
     }
     
-    async getMembers():Promise<Companies[]>{
+    async getMembers(){
         const headers = {
             'Authorization': `bearer ${this.token}`,
         }
-        let body = {
-            "query": `query {
-               user(login: "${this.query}") {
-                  name
-                  contributionsCollection {
-                    contributionCalendar {
-                      totalContributions
-                      
-                    }
-                  }
-                }
-              }`
-        }
-        const setUser = (value:string)=>{
-            body = {
-                "query": `query {
-                    user(login: "${value}") {
-                      name
-                      contributionsCollection {
-                        contributionCalendar {
-                          totalContributions
-                          
-                        }
-                      }
-                    }
-                  }`
-            }
-        }
-        this.fetchAllOrgs().forEach(async orgs =>{
-        setUser(orgs.login)
-        const response = await fetch('https://api.github.com/orgs/'+orgs.login+'/members?page=1', { method: 'POST', body: JSON.stringify(body), headers: headers })
-        let data = await response.json()
-        // data = Array.from(data).length
-        // data.data.user.contributionsCollection.contributionCalendar.totalContributions:'empty'
-        this.companies.push({...orgs, ...data});
-        })
-
-        return this.companies
+        
     }
 
 
