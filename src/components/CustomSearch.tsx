@@ -4,25 +4,33 @@ import CircularSpinner from './CircularSpinner';
 import {useEffect,useState} from 'react';
 
 
-export const CustomSearch = ()=>{
-    let value = 1;
+export const CustomSearch = (props:{receive:(e:string|any)=>void})=>{
+    
     const [data,setData] = useState('');
-    function updateValue(e:string){
-        useEffect( ()=>{
-        setData(data)
-         },[e])
+    let timeout:any = null;
+    
+    function updateValue(e:string|any){
+        clearTimeout(timeout)
+        timeout = setTimeout(function(){
+            setData(e.target.value)
+            // console.log(e.target.value)
+            props.receive(e.target.value);
+        },1000)
+        
     }
     
-
     return(
         <div className="custom-text-input">
-            <input type="text" name="" id="" onChange={(e)=>updateValue}placeholder="Type a user name here"/>
+            
+            <input type="text" name="" id=""
+             placeholder="Type a user name here" 
+             onKeyUp={updateValue}/>
              <span>
                  {
-                 data==''?<SearchIcon style={{color:'#fff'}}/>:<CircularSpinner/>
+                 data===''?<SearchIcon style={{color:'#fff'}}/>:<CircularSpinner/>
              }</span>
-           
         </div>
+        
        
     )
 }

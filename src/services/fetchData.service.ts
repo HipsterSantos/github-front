@@ -5,21 +5,44 @@ export class fetchData{
     private token = '44027e0bb7d0755a73f1a3721265208c4658cd35' || process.env.REACT_API_KEY;
     private users: Users[] = [];
     private companies: Companies[] = [];
+    private test:any[] = [];
     constructor(public query:string){
-
+            this.fetchAllUsers();
     }
-    fetchAllUsers():Users[]{
+    testFetch():any[]{
+        
         var apiResponse = fetch(`https://api.github.com/search/users?q=`+this.query, { method: 'GET'})
         .then(data=>data.json())
         .then(data=>{
-            data.items?.forEach((eachone: any[])=>{
-                    //filer all user by type = User
-                    eachone.filter(d=>{
-                        d.type == "User"
-                        this.users.push(d);
+            data.items?.filter((d:any)=>{
+                       if(d.type == "User"){
+                           
+                           this.test.push(d);
+                           
+                       }
+                      console.log(d)
                     })
+                   
+            })
+        
+     return this.test;
+    }
+    fetchAllUsers():Users[]{
+        
+        var apiResponse = fetch(`https://api.github.com/search/users?q=`+this.query, { method: 'GET'})
+        .then(data=>data.json())
+        .then(data=>{
+            data.items?.filter((each:Users)=>{
+                    //filer all user by type = User
+                       if(each.type == "User"){
+                           
+                           this.users.push(each);
+                          //    console.log(each) 
+                       }
+                    //    console.log(this.users)
             })
         })
+       
      return this.users;
     }
 
@@ -27,24 +50,26 @@ export class fetchData{
         var apiResponse = fetch(`https://api.github.com/search/users?q=`+this.query, { method: 'GET'})
         .then(data=>data.json())
         .then(data=>{
-            data.items?.forEach((eachone: any[])=>{
-                //filter all users by type = Organization 
-                eachone.filter(d=>{
-                        d.type == "Organization"
-                        this.companies.push(d);
+            data.items?.filter((d:Companies)=>{
+                       if( d.type == "Organization"){
+
+                           this.companies.push(d);
+                       }
                     })
-            })
+                    // console.log(eachone)
+            
         })
          return this.companies;
     }
 
-    async getContribution(login:string):Promise<Users[]>{
+    getContribution(users:Users[]){
+        let fake:Users[]=[];
         const headers = {
             'Authorization': `bearer ${this.token}`,
         }
         let body = {
             "query": `query {
-               user(login: "${login}") {
+               user(login: "${this.query}") {
                   name
                   contributionsCollection {
                     contributionCalendar {
@@ -70,15 +95,14 @@ export class fetchData{
                   }`
             }
         }
-        this.fetchAllUsers().forEach(async user=>{
-            setUser(user.login)
-            const response = await fetch('https://api.github.com/graphql', { method: 'POST', body: JSON.stringify(body), headers: headers })
-            const data = await response.json()
-              // data.data.user.contributionsCollection.contributionCalendar.totalContributions:'empty'
-            this.users.push({...user,...data});
+        fake = Array.from(users);
+        fake.forEach(d=>{
+            console.log(d)
         })
+        console.log('from get contribuitions',users)
+         
 
-        return this.users;
+        // return this.users;
     }
     
     async getMembers():Promise<Companies[]>{
