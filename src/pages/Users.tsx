@@ -15,7 +15,7 @@ export const UsersPage = ()=>{
   clearTimeout(timeout);
   setTimeout(()=>{
           const headers = {
-              'Authorization': `bearer 348e0517425e6fcc7a815b6489626d381b9e2a65`,
+              'Authorization': `bearer c5650db038c4a54033bbc66229895514b4a8b16f`,
           }
           cont.forEach( async (data:any) =>{
             // console.log('contribuitons loop')
