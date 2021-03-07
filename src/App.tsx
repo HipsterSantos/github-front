@@ -5,19 +5,30 @@ import { fetchData } from './services/fetchData.service';
 import { Main } from './pages/Main';
 import { Empty } from './pages/Empty.message';
 import { Data } from './shared/shared';
+import { fetchDataService } from './services/fetcher.service';
+
 export const  gitHubuser:any = createContext('');
 function App() {
     const [value,setValue] = useState('')
-    const [user,setUser] = useState(null);
+    let users:any[] = [];
     const [orgs,setOrgs] = useState(null);
     let fetcher = new fetchData(value);
-   
+    let getter = new fetchDataService(value);
+    let timeout:any = null;
+
     async function receiveInput(value:any){
       setValue(value);
-      fetcher = new fetchData(value);
-      fetcher.testFetch();
+      fetcher = new fetchData(value)
+      getter = new fetchDataService(value)
+     
+      clearTimeout(timeout)
+      setTimeout(async()=>{
+        // await getter.fetchAllUsers();
+         getter.getContributions(fetcher.fetchAllUsers());
+      },2000)
+      
     }
-
+    
 
     
     

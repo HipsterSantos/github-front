@@ -2,13 +2,12 @@ import './Users.scss'
 import { List } from '../components/List';
 import { Data } from '../shared/shared';
 import { toUserCompanySmall } from './Small';
-
+import { gitHubuser } from '../App';
 import {useContext,createContext} from 'react';
-import { toUserCompanyLarge } from './Large';
-export const toList:any|any[] = createContext(null)
+
 export const UsersPage = ()=>{
-    const receivedFromSmall = useContext(toUserCompanySmall || toUserCompanyLarge)
-    // console.log('from user page',receivedFromSmall)
+  const GitHubOutcome:any = useContext(gitHubuser)
+    console.log('from user page',GitHubOutcome)
     return(
         <div className="github-companies-right">
                     
@@ -17,10 +16,8 @@ export const UsersPage = ()=>{
                   <p className="companies-right">CONTRIBUTIONS<span></span></p>
                 </div>
                 <div className="content-itself">
-                   <toList.Provider value={receivedFromSmall}>
-                     <List/>
-                  </toList.Provider>
-                           <p id="p" className="show-more">SHOW MORE</p>      
+                     <List collection={GitHubOutcome[0]}/>
+                   <p id="p" className="show-more">SHOW MORE</p>      
                  </div>
     </div>
     )
