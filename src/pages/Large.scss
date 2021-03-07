@@ -2,6 +2,10 @@
     .splitters-descriptors{
         display: flex;
         width: inherit;
+        .inside-menu{
+            color: #181830;
+            text-decoration: none;
+        }
         .github::after{
             content: " ";
             display: block;
