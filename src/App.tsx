@@ -5,17 +5,26 @@ import { fetchData } from './services/fetchData.service';
 import { Main } from './pages/Main';
 import { Empty } from './pages/Empty.message';
 import { Data } from './shared/shared';
+import { fetchDataService } from './services/fetcher.service';
+
 export const  gitHubuser:any = createContext('');
 function App() {
     const [value,setValue] = useState('')
-    const [user,setUser] = useState(null);
+    let users:any[] = [];
     const [orgs,setOrgs] = useState(null);
-    let fetcher = new fetchData(value);
-   
+    // let fetcher = new fetchData(value);
+    let getter = new fetchDataService(value);
+    let timeout:any = null;
     async function receiveInput(value:any){
       setValue(value);
-      fetcher = new fetchData(value);
-      fetcher.testFetch();
+      getter = new fetchDataService(value)
+     
+      clearTimeout(timeout)
+      setTimeout(()=>{
+        getter.fetchAllUsers();
+         console.log('users',getter.users)
+      },2000)
+     
     }
 
 
@@ -35,7 +44,7 @@ function App() {
             </div>
             
             <div className="holder-responsive">
-              <gitHubuser.Provider value={[fetcher.fetchAllUsers(),fetcher.fetchAllOrgs()]}>
+              <gitHubuser.Provider value={[users]}>
                 { value===''?<Empty/>:<Main/>}
               </gitHubuser.Provider>
                 

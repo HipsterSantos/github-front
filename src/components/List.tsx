@@ -1,39 +1,37 @@
 import './List.scss'
 import empy from '../pages/empty.svg'
-import { toList } from '../pages/Users';
 import {useContext,createContext} from 'react';
+import { gitHubuser } from '../App';
 
 
-export const Item = ()=>{
-    const GitHubOutcome = useContext(toList)
-    console.log('from list and put it ',GitHubOutcome)
+export const Item = (props:{login:string,totalc:number,avatar:string})=>{
+    const GitHubOutcome:any = useContext(gitHubuser)
+    console.log('from list and put it ====',GitHubOutcome)
     return( 
         <div className="list-main">
             <div className="divider"></div>
             <div className="whole-content">
                 <div className="avatar">
-                    <img src={"https://images.unsplash.com/photo-1614961233913-a5113a4a34ed?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1534&q=80"} alt="" width="50" height="50"/>
+                    <img src={props.avatar} alt="" width="50" height="50"/>
                 </div>
                 <div className="content">
-                    <p>John Doe</p> <br/>
-                    <span>John doe</span>
+                    <p>{props.login}</p> <br/>
+                    <span>{props.login}</span>
                 </div>
                 <div className="contribution-people">
-                    <p>23</p>
+                    <p>{props.totalc}</p>
                 </div>
             </div>
         </div>
     )
 }
 
-export const List  = ()=>{
-    return(
-        <div>
-            <Item/>
-            <Item/>
-            <Item/>
-            <Item/>
-        </div>
-        
+export const List  = ({collection}:{collection:any[]})=>{
+    return(<>
+            {collection.map( data=>(
+
+            <Item key={data.node_id} login={data.login} avatar={data.avatar_url} totalc={43}/>
+            ))}   
+            </>
     )
 }
