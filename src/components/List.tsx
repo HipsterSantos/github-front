@@ -4,9 +4,22 @@ import {useContext,createContext} from 'react';
 import { gitHubuser } from '../App';
 
 
+
+
+export const List  = ({collection}:{collection:any[]})=>{
+    
+    console.log('From list --- ',collection)
+    return(<>
+            {collection.map( data=>(
+
+            <Item key={data.node_id} login={data.login} avatar={data.avatar_url} totalc={43}/>
+            ))}   
+            </>
+    )
+}
+
 export const Item = (props:{login:string,totalc:number,avatar:string})=>{
-    const GitHubOutcome:any = useContext(gitHubuser)
-    console.log('from list and put it ====',GitHubOutcome)
+    
     return( 
         <div className="list-main">
             <div className="divider"></div>
@@ -23,15 +36,5 @@ export const Item = (props:{login:string,totalc:number,avatar:string})=>{
                 </div>
             </div>
         </div>
-    )
-}
-
-export const List  = ({collection}:{collection:any[]})=>{
-    return(<>
-            {collection.map( data=>(
-
-            <Item key={data.node_id} login={data.login} avatar={data.avatar_url} totalc={43}/>
-            ))}   
-            </>
     )
 }
