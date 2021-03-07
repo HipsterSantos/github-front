@@ -18,12 +18,12 @@ export function Larger(){
           <div className="splitters-descriptors">
           
                 <div className="github-users-left">
-                    <Link to="/users" className="github inside-menu">USERS({GitHubOutcome[0].length})</Link>
-                    <Route path="/users" render={()=><UsersPage/>}></Route>
+                    <Link to="/" className="github inside-menu">USERS({GitHubOutcome[0].length})</Link>
+                    <Route path="/" exact render={()=><UsersPage/>}></Route>
                 </div>
                 <div className="github-companies-right">
-                       <Link to="/companies" className="github inside-menu">COMPANIES({GitHubOutcome[1].length})</Link>
-                       <Route path="/companies" render={()=><CompaniesPage/>}></Route>
+                       <Link to="/" className="github inside-menu">COMPANIES({GitHubOutcome[1].length})</Link>
+                       <Route path="/" render={()=><CompaniesPage/>}></Route>
                  </div>
               
           </div>

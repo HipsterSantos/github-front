@@ -5,7 +5,6 @@ import { fetchData } from './services/fetchData.service';
 import { Main } from './pages/Main';
 import { Empty } from './pages/Empty.message';
 import { Data } from './shared/shared';
-import { fetchDataService } from './services/fetcher.service';
 export function shipper(value:any){
   return value;
 }
