@@ -1,7 +1,5 @@
 import './Companies.scss'
 import { List } from '../components/List';
-import { Data } from '../shared/shared';
-import { toUserCompanySmall } from './Small';
 import { gitHubuser } from '../App';
 import {useContext,createContext} from 'react';
 

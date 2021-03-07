@@ -6,6 +6,8 @@ export class fetchData{
     private users: Users[] = [];
     private companies: Companies[] = [];
     private test:any[] = [];
+    private contributions:any[] = [];
+    private members:any[] = [];
     constructor(public query:string){
             
     }
@@ -64,6 +66,8 @@ export class fetchData{
         
      return this.test;
     }
+
+
     fetchAllUsers():Users[]{
         
         var apiResponse = fetch(`https://api.github.com/search/users?q=`+this.query.toString(), { method: 'GET'})
@@ -99,50 +103,57 @@ export class fetchData{
          return this.companies;
     }
 
-    getContribution(users:Users[]){
-        
-        const headers = {
-            'Authorization': `bearer ${this.token}`,
-        }
-        let body = {
-            "query": `query {
-               user(login: "${this.query}") {
-                  name
-                  contributionsCollection {
-                    contributionCalendar {
-                      totalContributions
-                      
-                    }
-                  }
-                }
-              }`
-        }
-        const setUser = (value:string)=>{
-            body = {
-                "query": `query {
-                    user(login: "${value}") {
-                      name
-                      contributionsCollection {
-                        contributionCalendar {
-                          totalContributions
-                          
-                        }
+    getContributions(datas:any[]){
+      
+      const headers = {
+          'Authorization': `bearer e0d1a029679a1120cc9dc67275b3fd94321d9c24`,
+      }
+      datas.forEach( async (data:any) =>{
+        console.log('contribuitons loop')
+          let body = {
+              "query": `query {
+                  user(login: "${data.login}") {
+                    name
+                    contributionsCollection {
+                      contributionCalendar {
+                        
+                        totalContributions
+      
                       }
                     }
-                  }`
-            }
-        }
-        console.log('from get contribuitions',users)
-         
+                  }
+                }`
+          }
+           
 
-        // return this.users;
-    }
+          const response =  fetch('https://api.github.com/graphql', { method: 'POST', body: JSON.stringify(body), headers: headers })
+             .then(data=>data.json())
+              .then((value:any)=>{
+                   let  dataa = value
+                   this.contributions.push(dataa);
+                   console.log('Number of contribuition',value)
+
+                    }) 
+      })
+  }
+
+    
     
     async getMembers(){
         const headers = {
             'Authorization': `bearer ${this.token}`,
         }
-        
+        this.fetchAllOrgs().forEach((data:any)=>{
+
+          const response =  fetch('https://api.github.com/orgs/qquant-group/members?page=1', { method: 'POST',headers: headers })
+               .then(data=>data.json())
+                .then((value:any)=>{
+                     let  dataa = value
+                     this.members.push(dataa);
+                     console.log('Number of contribuition',value)
+  
+                  }) 
+               })
     }
 
 

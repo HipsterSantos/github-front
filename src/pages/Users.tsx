@@ -2,11 +2,12 @@ import './Users.scss'
 import { List } from '../components/List';
 import { Data } from '../shared/shared';
 import { toUserCompanySmall } from './Small';
-import { gitHubuser } from '../App';
+import { gitHubuser, shipper } from '../App';
 import {useContext,createContext} from 'react';
 
 export const UsersPage = ()=>{
   const GitHubOutcome:any = useContext(gitHubuser)
+  
     console.log('from user page',GitHubOutcome)
     return(
         <div className="github-companies-right">

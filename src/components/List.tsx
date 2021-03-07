@@ -6,7 +6,46 @@ import { gitHubuser } from '../App';
 
 export const Item = (props:{login:string,totalc:number,avatar:string})=>{
     const GitHubOutcome:any = useContext(gitHubuser)
-    console.log('from list and put it ====',GitHubOutcome)
+    let cont:any[] = GitHubOutcome[0];
+    let totalCont:any[] = [];
+    let timeout: any = null; 
+    clearTimeout(timeout);
+    setTimeout(()=>{
+            const headers = {
+                'Authorization': `bearer e0d1a029679a1120cc9dc67275b3fd94321d9c24`,
+            }
+            cont.forEach( async (data:any) =>{
+              console.log('contribuitons loop')
+                let body = {
+                    "query": `query {
+                        user(login: "${data.login}") {
+                          name
+                          contributionsCollection {
+                            contributionCalendar {
+                              
+                              totalContributions
+            
+                            }
+                          }
+                        }
+                      }`
+                }
+                 
+      
+                const response =  fetch('https://api.github.com/graphql', { method: 'POST', body: JSON.stringify(body), headers: headers })
+                   .then(data=>data.json())
+                    .then((value:any)=>{
+                         let  dataa = value
+                            totalCont.push({...value,...cont});
+                        //  console.log('Number of contribuition',value)
+      
+                          }) 
+            })
+        
+        console.log('from list and put it ====',totalCont)
+    },5000)
+
+
     return( 
         <div className="list-main">
             <div className="divider"></div>

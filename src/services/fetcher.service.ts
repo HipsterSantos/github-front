@@ -62,7 +62,7 @@ export class fetchDataService{
             }`
       }}
        users.forEach( async (data:any) =>{
-        console.log('got reach each user from main')
+        console.log('got reach each user')
           setUser(data.login);
           const response =  fetch('https://api.github.com/graphql', { method: 'POST', body: JSON.stringify(body), headers: headers })
              .then(data=>data.json())
