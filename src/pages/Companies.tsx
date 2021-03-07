@@ -17,8 +17,8 @@ export const CompaniesPage = ()=>{
                   <p className="companies-right">PEOPLE<span></span></p>
                 </div>
                 <div className="content-itself">
-                     <List collection={GitHubOutcome[0]}/>
-                   <p id="p" className="show-more">SHOW MORE</p>      
+                     <List collection={GitHubOutcome[1]}/>
+                         
                  </div>
     </div>
     )

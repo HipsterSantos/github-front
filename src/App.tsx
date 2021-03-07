@@ -12,21 +12,23 @@ function App() {
     const [value,setValue] = useState('')
     let users:any[] = [];
     const [orgs,setOrgs] = useState(null);
-    // let fetcher = new fetchData(value);
+    let fetcher = new fetchData(value);
     let getter = new fetchDataService(value);
     let timeout:any = null;
+
     async function receiveInput(value:any){
       setValue(value);
+      fetcher = new fetchData(value)
       getter = new fetchDataService(value)
      
       clearTimeout(timeout)
-      setTimeout(()=>{
-        getter.fetchAllUsers();
-         console.log('users',getter.users)
+      setTimeout(async()=>{
+        // await getter.fetchAllUsers();
+         getter.getContributions(fetcher.fetchAllUsers());
       },2000)
-     
+      
     }
-
+    
 
     
     
@@ -44,7 +46,7 @@ function App() {
             </div>
             
             <div className="holder-responsive">
-              <gitHubuser.Provider value={[users]}>
+              <gitHubuser.Provider value={[fetcher.fetchAllUsers(),fetcher.fetchAllOrgs()]}>
                 { value===''?<Empty/>:<Main/>}
               </gitHubuser.Provider>
                 
